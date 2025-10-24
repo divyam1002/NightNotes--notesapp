@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <main>
+            <div class="app-container">
+                <div class="left">
+                    <div class="brand">
+                        <div class="logo">N</div>
+                        <div>
+                            <h1>NightNotes</h1>
+                            <p>Quick notes . local-only</p>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button>+ New</button>
+                        <button>Import</button>
+                        <button>Export</button>
+                    </div>
+                    <div class="search">
+                        <input type="text" placeholder="Search notes..." />
+                    </div>
+                    <ul class="notes-list">
+                        <li class="list-item">
+                            <h2>Welcome</h2>
+                            <div class="creation-date-time">
+                                <span class="creation-date"> 10/24/2025 </span>,
+                                <span class="creation-time"> 10/24/2025 </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <div class="title-status">
+                        <h1 class="title">Welcome</h1>
+                        <h3 class="status">
+                            Last saveed: 10/24/2025,10/24/2025
+                        </h3>
+                    </div>
+                    <div class="right-btns">
+                        <button>Auto-save</button>
+                        <button>LocalStorage</button>
+                        <button>Delete</button>
+                    </div>
+                    <div
+                        class="editor"
+                        id="content"
+                        contenteditable="true"
+                        spellcheck="true"
+                    ></div>
+                    <div class="footer">
+                        <div>Encrypted? No-this is local only.</div>
+                        <div>Made with <i class="ri-heart-fill"></i></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+    <script src="script.js"></script>
+</html>

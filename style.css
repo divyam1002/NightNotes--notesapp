@@ -1,0 +1,207 @@
+:root {
+    --bg: #0b0f12;
+    --panel: #0f1417;
+    --muted: #9aa6ae;
+    --accent: #6ee7b7;
+    --accent-2: #60a5fa;
+    --glass: rgba(255, 255, 255, 0.03);
+    --danger: #ff7b7b;
+    --radius: 14px;
+    font-family: "Inter", system-ui, Segoe UI, Roboto, Arial;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+main {
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.app-container {
+    height: 80vh;
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.left {
+    width: 30%;
+    height: 100%;
+    background-color: var(--panel);
+    border-radius: 1rem;
+    padding: 1.4rem 1rem;
+    backdrop-filter: blur(6px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.brand h1 {
+    font-size: 16px;
+}
+
+.brand p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #012;
+    font-weight: 700;
+    cursor: default;
+}
+
+.btns {
+    padding: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.6rem;
+    font-weight: 700;
+    background: transparent;
+    color: inherit;
+    border: 1px solid var(--glass);
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(11, 177, 227, 0.025);
+}
+
+.btns button:nth-child(1) {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #012;
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
+    border: none;
+}
+
+.search input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.6rem;
+    background-color: var(--glass);
+    color: inherit;
+    margin: 1rem 0;
+}
+
+.list-item {
+    width: 100%;
+    margin: 1rem 0;
+    list-style: none;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 0.6rem;
+    color: inherit;
+    background-color: var(--glass);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1px;
+}
+/* active class */
+.list-item .active {
+    background: linear-gradient(
+        90deg,
+        rgba(96, 165, 250, 0.06),
+        rgba(110, 231, 183, 0.03)
+    );
+    border: 1px solid rgba(96, 165, 250, 0.12);
+}
+
+.list-item h2 {
+    font-size: 1rem;
+}
+
+.creation-date-time {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.right {
+    width: 70%;
+    height: 100%;
+    background-color: var(--panel);
+    border-radius: 1rem;
+    padding: 1.4rem 1rem;
+}
+
+.title-status {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title {
+    font-size: 1.8rem;
+}
+.status {
+    font-size: 0.9rem;
+    font-weight: 200;
+    color: var(--muted);
+    letter-spacing: 0.8px;
+}
+
+.right-btns {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.right-btns button:nth-child(3) {
+    position: absolute;
+    right: 0;
+    background: linear-gradient(-135deg, var(--accent), var(--accent-2));
+    color: #012;
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
+    border: none;
+}
+
+.editor {
+    width: 100%;
+    min-height: 80%;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.6rem;
+    background-color: var(--glass);
+    color: inherit;
+    margin: 1rem 0;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
