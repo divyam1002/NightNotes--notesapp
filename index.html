@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="btns">
-                        <button class="primary">+ New</button>
+                        <button id="newBtn" class="primary">+ New</button>
                         <button>Import</button>
                         <button>Export</button>
                     </div>
@@ -33,18 +33,18 @@
                     </div>
 
                     <ul class="notes-list">
-                        <li class="list-item active">
+                        <!-- <li class="list-item active">
                             <h2>Welcome</h2>
                             <div class="creation-date-time">
                                 <span>10/24/2025</span>, <span>10:24 AM</span>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </aside>
 
                 <section class="right">
                     <div class="title-status">
-                        <h1 class="title">Welcome</h1>
+                        <h1 class="title" contenteditable="true">Untitled</h1>
                         <h3 class="status">Last saved: 10/24/2025, 10:24 AM</h3>
                     </div>
 
@@ -58,16 +58,21 @@
                         id="content"
                         class="editor"
                         contenteditable="true"
-                        spellcheck="true"
                     ></div>
 
                     <footer class="footer">
-                        <div>Encrypted? No — this is local only.</div>
+                        <div>Encrypted? No - this is local only.</div>
                         <div>Made with <i class="ri-heart-fill"></i></div>
                     </footer>
                 </section>
             </div>
         </main>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+            integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
         <script src="script.js"></script>
     </body>
 </html>
