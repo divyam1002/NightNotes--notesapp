@@ -7,7 +7,7 @@
     --glass: rgba(255, 255, 255, 0.03);
     --danger: #ff7b7b;
     --radius: 14px;
-    font-family: "Inter", system-ui, Segoe UI, Roboto, Arial;
+    font-family: "Inter", system-ui, "Segoe UI", Roboto, Arial;
 }
 
 * {
@@ -20,33 +20,39 @@ html,
 body {
     height: 100%;
     width: 100%;
-}
-main {
-    height: 100%;
-    width: 100%;
-    background-color: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: var(--bg);
     color: #fff;
 }
 
-.app-container {
-    height: 80vh;
-    width: 90vw;
+main {
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: center;
+    padding: 2rem 0;
 }
 
+.app-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+    max-width: 1400px;
+    height: 80vh;
+    gap: 1rem;
+    margin: 0 auto;
+}
+
+/* Left panel */
 .left {
     width: 30%;
     height: 100%;
-    background-color: var(--panel);
-    border-radius: 1rem;
+    background: var(--panel);
+    border-radius: var(--radius);
     padding: 1.4rem 1rem;
     backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
 }
 
 .brand {
@@ -77,13 +83,7 @@ main {
     cursor: default;
 }
 
-.btns {
-    padding: 0.8rem 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
+/* Buttons */
 button {
     padding: 0.5rem 0.8rem;
     border-radius: 0.6rem;
@@ -93,48 +93,65 @@ button {
     border: 1px solid var(--glass);
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(11, 177, 227, 0.025);
+    transition: 0.2s ease;
 }
 
-.btns button:nth-child(1) {
+button:hover {
+    opacity: 0.9;
+}
+
+.primary {
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     color: #012;
-    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
     border: none;
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
 }
 
+.danger {
+    background: linear-gradient(-135deg, var(--accent), var(--accent-2));
+    color: #012;
+    border: none;
+    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
+}
+
+.btns {
+    padding: 0.8rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Search */
 .search input {
     width: 100%;
     padding: 0.5rem;
+    margin: 1rem 0;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.6rem;
-    background-color: var(--glass);
+    background: var(--glass);
     color: inherit;
-    margin: 1rem 0;
 }
 
+/* Notes list */
 .list-item {
-    width: 100%;
-    margin: 1rem 0;
     list-style: none;
     padding: 0.5rem;
+    margin: 1rem 0;
     border: 1px solid rgba(255, 255, 255, 0.02);
     border-radius: 0.6rem;
-    color: inherit;
-    background-color: var(--glass);
-    cursor: pointer;
+    background: var(--glass);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 1px;
+    cursor: pointer;
 }
-/* active class */
-.list-item .active {
+
+.list-item.active {
     background: linear-gradient(
         90deg,
         rgba(96, 165, 250, 0.06),
         rgba(110, 231, 183, 0.03)
     );
-    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-color: rgba(96, 165, 250, 0.12);
 }
 
 .list-item h2 {
@@ -146,23 +163,29 @@ button {
     color: var(--muted);
 }
 
+/* Right panel */
 .right {
     width: 70%;
     height: 100%;
-    background-color: var(--panel);
-    border-radius: 1rem;
+    background: var(--panel);
+    border-radius: var(--radius);
     padding: 1.4rem 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .title-status {
-    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 }
+
 .title {
     font-size: 1.8rem;
 }
+
 .status {
     font-size: 0.9rem;
     font-weight: 200;
@@ -176,32 +199,139 @@ button {
     align-items: center;
     gap: 1rem;
     position: relative;
+    flex-wrap: wrap;
 }
 
-.right-btns button:nth-child(3) {
-    position: absolute;
-    right: 0;
-    background: linear-gradient(-135deg, var(--accent), var(--accent-2));
-    color: #012;
-    box-shadow: 0 6px 18px rgba(96, 165, 250, 0.08);
-    border: none;
+.right-btns button.danger {
+    position: static; /* fix overlap on mobile */
 }
 
 .editor {
     width: 100%;
-    min-height: 80%;
+    flex: 1;
+    margin: 1rem 0;
     padding: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.6rem;
-    background-color: var(--glass);
+    background: var(--glass);
     color: inherit;
-    margin: 1rem 0;
+    outline: none;
+    overflow-y: auto;
 }
 
 .footer {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     font-size: 0.9rem;
     color: var(--muted);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
+
+/* Tablets (<=1024px) */
+@media (max-width: 1024px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+        width: 95vw;
+        max-width: 800px;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+    }
+
+    .left {
+        padding: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    .brand {
+        width: 100%;
+    }
+
+    .btns,
+    .search,
+    .notes-list {
+        width: 100%;
+    }
+
+    .notes-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .list-item {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .right {
+        margin-top: 1rem;
+    }
+}
+
+/* Mobile (<=640px) */
+@media (max-width: 640px) {
+    .app-container {
+        flex-direction: column;
+        gap: 0.8rem;
+        height: auto;
+        width: 95vw;
+        max-width: 500px;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .brand {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .status {
+        font-size: 0.8rem;
+    }
+
+    .btns {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .list-item {
+        flex: 1 1 100%;
+    }
+
+    .right-btns {
+        flex-direction: column; /* stack buttons vertically */
+        align-items: stretch;
+    }
+
+    .right-btns button {
+        width: 100%;
+    }
+
+    .editor {
+        min-height: 300px;
+    }
+
+    .footer {
+        font-size: 0.8rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
