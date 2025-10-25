@@ -3,64 +3,113 @@ const title = document.querySelector(".title");
 const editorContent = document.querySelector("#content");
 const notesList = document.querySelector(".notes-list");
 
-// Function to select all text inside the title
-function titleSelect() {
-    if (!title) return; // Exit if title doesn't exist
-    const range = document.createRange(); // Create a new range (for selecting text)
-    const selection = window.getSelection(); // Get current text selection
-    range.selectNodeContents(title); // Select all content of the title
-    selection.removeAllRanges(); // Clear any previous selection
-    selection.addRange(range); // Apply new selection
-}
+let notes = [];
+let activeNoteId = null;
 
-// When a note in the list is clicked
-notesList.addEventListener("click", (e) => {
-    const li = e.target.closest("li"); // Get the clicked <li> or its parent
-    if (!li) return; // Exit if not clicking on a <li>
-
-    // Remove "active" class from all notes
-    notesList.querySelectorAll("li.active").forEach((item) => {
-        item.classList.remove("active");
-    });
-
-    // Add "active" class to the clicked note
-    li.classList.add("active");
+// Load Notes
+window.addEventListener("load", (e) => {
+    const stored = JSON.parse(localStorage.getItem("notes")) || [];
+    notes = stored;
+    renderNotes();
 });
 
-// When "New Note" button is clicked
+//Render Notes
+function renderNotes() {
+    notesList.innerHTML = "";
+    notes.forEach((note) => {
+        const li = document.createElement("li");
+        li.classList.add("list-item");
+        if (note.id === activeNoteId) li.classList.add("active");
+
+        const h2 = document.createElement("h2");
+        h2.textContent = note.title || "Untitled";
+        li.appendChild(h2);
+
+        li.dataset.id = note.id;
+        notesList.prepend(li);
+    });
+}
+
+// Create Note
 newBtn.addEventListener("click", () => {
-    // Remove "active" class from current active note (if any)
-    const currentActive = notesList.querySelector(".active");
-    if (currentActive) currentActive.classList.remove("active");
+    const note = {
+        id: Date.now(),
+        title: "Untitled",
+        content: "",
+        createdAt: new Date().toISOString(),
+    };
 
-    // Create a new <li> for the note
-    const li = document.createElement("li");
-    li.classList.add("list-item"); // Add styling class
+    notes.push(note);
+    activeNoteId = note.id;
 
-    // Create a <h2> for the note title
-    const h2 = document.createElement("h2");
-    h2.textContent = title.textContent; // Copy current title text
+    saveNotes();
+    renderNotes();
+    loadNoteToEditor(note.id);
 
-    li.classList.add("active"); // Make the new note active
-    li.appendChild(h2); // Add the <h2> to <li>
-    notesList.prepend(li); // Add the new note at the top of the list
-
-    // Focus on the title and select all text so user can edit immediately
     title.focus();
     titleSelect();
 });
 
-// When Enter key is pressed inside the title
+// Function to load a note into editor
+function loadNoteToEditor(id) {
+    const note = notes.find((n) => n.id === id);
+    if (!note) return;
+
+    activeNoteId = id;
+    title.textContent = note.title;
+    editorContent.textContent = note.content;
+
+    document.querySelectorAll(".list-item").forEach((li) => {
+        li.classList.toggle("active", li.dataset.id == id);
+    });
+}
+
+// Handle note click (load its content)
+notesList.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    if (!li) return;
+
+    const id = Number(li.dataset.id);
+    loadNoteToEditor(id);
+});
+
+// Save notes to localStorage
+function saveNotes() {
+    localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+// Handel typing in title
+title.addEventListener("input", (e) => {
+    const note = notes.find((n) => n.id === activeNoteId);
+    if (!note) return;
+    note.title = e.target.textContent || "Untitled";
+    saveNotes();
+    renderNotes();
+});
+
+// Switching from title to editor
 title.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        e.preventDefault(); // Prevent creating a new line
-        editorContent.focus(); // Move cursor to the note content area
+        e.preventDefault();
+        editorContent.focus();
     }
 });
 
-// When typing inside the title
-title.addEventListener("input", (e) => {
-    const activeLi = document.querySelector("li.active"); // Get active note
-    let h2 = activeLi.firstElementChild; // Get its <h2> title
-    h2.textContent = e.target.textContent; // Update <h2> to match title input
+// Handel typing in editor
+editorContent.addEventListener("input", (e) => {
+    const note = notes.find((n) => n.id === activeNoteId);
+    if (!note) return;
+
+    note.content = editorContent.textContent;
+    saveNotes();
 });
+
+// Select all title text (your function)
+function titleSelect() {
+    if (!title) return;
+    const range = document.createRange();
+    const selection = window.getSelection();
+    range.selectNodeContents(title);
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
